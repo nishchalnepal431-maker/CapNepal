@@ -20,7 +20,7 @@
 
         .container {
             background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
@@ -31,7 +31,7 @@
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2.3em;
             margin-bottom: 5px;
             background: linear-gradient(to right, #00c6ff, #0072ff);
             -webkit-background-clip: text;
@@ -41,18 +41,27 @@
         h3 {
             color: #d1d9e6;
             font-weight: normal;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
         }
 
-        input[type="text"] {
-            width: 80%;
-            padding: 12px 15px;
-            border-radius: 25px;
-            border: none;
-            outline: none;
-            font-size: 1em;
-            margin-bottom: 15px;
-            text-align: center;
+        .file-upload-box {
+            margin-bottom: 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .file-upload-box:hover {
+            border-color: #00c6ff;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="file"] {
+            color: #fff;
+            margin-top: 10px;
         }
 
         button {
@@ -65,24 +74,34 @@
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
+            width: 100%;
         }
 
         button:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             box-shadow: 0 0 15px #00c6ff;
         }
 
         .result-box {
             margin-top: 25px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
             text-align: left;
+            border-left: 5px solid #00c6ff;
         }
 
         .result-box p {
-            margin: 8px 0;
+            margin: 10px 0;
             font-size: 1.05em;
+        }
+
+        .styled-caption {
+            font-family: 'Impact', sans-serif;
+            font-size: 1.2em;
+            color: #ffcc00;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
         .footer {
@@ -95,18 +114,23 @@
 <body>
     <div class="container">
         <h1>CapNepal AI</h1>
-        <h3>भिडियो क्याप्सन जेनेरेटर</h3>
+        <h3>भिडियो अपलोड गरेर स्टाइलिस क्याप्सन निकाल्नुहोस्</h3>
         
-        <form method="POST">
-            <input type="text" name="video_topic" placeholder="भिडियोको विषय यहाँ लेख्नुहोस्..." required>
-            <br>
-            <button type="submit">क्याप्सन बनाउनुहोस्</button>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="file-upload-box">
+                <label for="video_file" style="cursor: pointer; display: block;">📁 यहाँ क्लिक गरेर भिडियो छान्नुहोस्</label>
+                <input type="file" name="video_file" id="video_file" accept="video/*" required>
+            </div>
+            <button type="submit">✨ क्याप्सन र स्टाइल जेनेरेट गर्नुहोस्</button>
         </form>
 
         {% if caption %}
         <div class="result-box">
-            <p><strong>📝 क्याप्सन:</strong> {{ caption }}</p>
-            <p><strong>🔥 ह्याशट्यागहरू:</strong> <span style="color: #00c6ff;">{{ hashtags }}</span></p>
+            <p><strong>📁 अपलोड भएको भिडियो:</strong> <span style="color: #00c6ff;">{{ filename }}</span></p>
+            <p><strong>📝 स्टाइलिस क्याप्सन:</strong></p>
+            <div class="styled-caption">{{ caption }}</div>
+            <br>
+            <p><strong>🔥 भाइरल ह्याशट्यागहरू:</strong> <br><span style="color: #00c6ff;">{{ hashtags }}</span></p>
         </div>
         {% endif %}
     </div>
