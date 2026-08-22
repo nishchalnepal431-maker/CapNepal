@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NISHCHAL TECH - CapNepal AI</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            padding: 0;
+            padding: 15px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
@@ -20,18 +24,18 @@
 
         .container {
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 25px 20px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             border: 1px rgba(255, 255, 255, 0.2) solid;
-            width: 90%;
-            max-width: 500px;
+            width: 100%;
+            max-width: 450px;
             text-align: center;
         }
 
         h1 {
-            font-size: 2.3em;
+            font-size: 2em;
             margin-bottom: 5px;
             background: linear-gradient(to right, #00c6ff, #0072ff);
             -webkit-background-clip: text;
@@ -42,16 +46,17 @@
             color: #d1d9e6;
             font-weight: normal;
             margin-bottom: 20px;
-            font-size: 1.1em;
+            font-size: 0.95em;
         }
 
         .file-upload-box {
             margin-bottom: 20px;
             border: 2px dashed rgba(255, 255, 255, 0.4);
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
             cursor: pointer;
             transition: 0.3s;
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .file-upload-box:hover {
@@ -62,15 +67,17 @@
         input[type="file"] {
             color: #fff;
             margin-top: 10px;
+            width: 100%;
+            font-size: 0.9em;
         }
 
         button {
             background: linear-gradient(to right, #00c6ff, #0072ff);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 12px 20px;
             border-radius: 25px;
-            font-size: 1.1em;
+            font-size: 1em;
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
@@ -83,54 +90,56 @@
         }
 
         .result-box {
-            margin-top: 25px;
+            margin-top: 20px;
             background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
             text-align: left;
             border-left: 5px solid #00c6ff;
+            word-break: break-word;
         }
 
         .result-box p {
-            margin: 10px 0;
-            font-size: 1.05em;
+            margin: 8px 0;
+            font-size: 0.95em;
         }
 
         .styled-caption {
             font-family: 'Impact', sans-serif;
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #ffcc00;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
-        .footer {
-            margin-top: 30px;
-            font-size: 0.95em;
+.footer {
+            margin-top: 20px;
+            font-size: 0.85em;
             color: #ffcc00;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>CapNepal AI</h1>
-        <h3>भिडियो अपलोड गरेर स्टाइलिस क्याप्सन निकाल्नुहोस्</h3>
+        <h3>मोबाइलमै भिडियो अपलोड गरेर क्याप्सन निकाल्नुहोस्</h3>
         
         <form method="POST" enctype="multipart/form-data">
             <div class="file-upload-box">
-                <label for="video_file" style="cursor: pointer; display: block;">📁 यहाँ क्लिक गरेर भिडियो छान्नुहोस्</label>
+                <label for="video_file" style="cursor: pointer; display: block;">📁 भिडियो छान्नुहोस्</label>
                 <input type="file" name="video_file" id="video_file" accept="video/*" required>
             </div>
-            <button type="submit">✨ क्याप्सन र स्टाइल जेनेरेट गर्नुहोस्</button>
+            <button type="submit">✨ क्याप्सन जेनेरेट गर्नुहोस्</button>
         </form>
 
         {% if caption %}
         <div class="result-box">
-            <p><strong>📁 अपलोड भएको भिडियो:</strong> <span style="color: #00c6ff;">{{ filename }}</span></p>
+            <p><strong>📁 भिडियो:</strong> <span style="color: #00c6ff;">{{ filename }}</span></p>
             <p><strong>📝 स्टाइलिस क्याप्सन:</strong></p>
             <div class="styled-caption">{{ caption }}</div>
             <br>
-            <p><strong>🔥 भाइरल ह्याशट्यागहरू:</strong> <br><span style="color: #00c6ff;">{{ hashtags }}</span></p>
+            <p><strong>🔥 ह्याशट्यागहरू:</strong> <br><span style="color: #00c6ff;">{{ hashtags }}</span></p>
         </div>
         {% endif %}
     </div>
