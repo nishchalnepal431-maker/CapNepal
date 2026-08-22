@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CapNepal - TikTok Style Auto Subtitles</title>
+    <title>CapNepal - Online AI Subtitles</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -60,7 +60,7 @@
             color: white;
             border: none;
             padding: 12px 20px;
-            border-radius: 25px;
+5            border-radius: 25px;
             font-size: 1em;
             cursor: pointer;
             font-weight: bold;
@@ -73,13 +73,15 @@
             background: rgba(0, 0, 0, 0.4);
             padding: 15px;
             border-radius: 15px;
-            text-align: center;
+            text-align: left;
             border-left: 5px solid #00c6ff;
+            word-break: break-word;
         }
-        video {
-            width: 100%;
-            border-radius: 10px;
+        .styled-caption {
+            font-size: 1.1em;
+            color: #ffcc00;
             margin-top: 10px;
+            line-height: 1.5;
         }
         .footer {
             margin-top: 20px;
@@ -92,7 +94,7 @@
 <body>
     <div class="container">
         <h1>CapNepal AI</h1>
-        <h3>भिडियोमा टिकटक स्टाइल सबटाइटल जोड्नुहोस्</h3>
+        <h3>अनलाइनमै भिडियोबाट टेक्स्ट निकाल्नुहोस्</h3>
         
         <form method="POST" enctype="multipart/form-data">
             <div class="file-upload-box">
@@ -102,15 +104,11 @@
             <button type="submit">✨ सबटाइटल जेनेरेट गर्नुहोस्</button>
         </form>
 
-        {% if output_video %}
+        {% if transcription %}
         <div class="result-box">
-            <p><strong>🎉 तयार भयो तपाईंको भिडियो!</strong></p>
-            <video controls>
-                <source src="{{ url_for('downloaded_file', filename=output_video) }}" type="video/mp4">
-                तपाईको ब्राउजरले भिडियो सपोर्ट गरेन।
-            </video>
-            <br><br>
-            <a href="{{ url_for('downloaded_file', filename=output_video) }}" download style="color: #00c6ff; font-weight: bold; text-decoration: none;">📥 भिडियो डाउनलोड गर्नुहोस्</a>
+            <p><strong>📁 भिडियो:</strong> <span style="color: #00c6ff;">{{ filename }}</span></p>
+            <p><strong>📝 निकालेको सबटाइटल:</strong></p>
+            <div class="styled-caption">{{ transcription }}</div>
         </div>
         {% endif %}
     </div>
