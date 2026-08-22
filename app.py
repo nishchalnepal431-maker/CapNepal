@@ -21,7 +21,6 @@ def home():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 
-                # स्टाइलिस क्याप्सन र ह्याशट्याग जेनेरेटर
                 caption = f"🔥 ({filename}) भिडियो अब TikTok र Reels मा भाइरल हुनेवाला छ! 🚀"
                 hashtags = "#NishchalTech #CapNepal #TrendingNepal #ViralReels #FYP #TikTokNepal"
                 
