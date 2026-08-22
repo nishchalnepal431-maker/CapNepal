@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NISHCHAL TECH - CapNepal AI</title>
+    <title>CapNepal - TikTok Style Auto Subtitles</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -73,16 +73,13 @@
             background: rgba(0, 0, 0, 0.4);
             padding: 15px;
             border-radius: 15px;
-            text-align: left;
+            text-align: center;
             border-left: 5px solid #00c6ff;
-            word-break: break-word;
         }
-        .styled-caption {
-            font-family: 'Impact', sans-serif;
-            font-size: 1.1em;
-            color: #ffcc00;
+        video {
+            width: 100%;
+            border-radius: 10px;
             margin-top: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         .footer {
             margin-top: 20px;
@@ -95,23 +92,25 @@
 <body>
     <div class="container">
         <h1>CapNepal AI</h1>
-        <h3>मोबाइलमै भिडियो अपलोड गरेर क्याप्सन निकाल्नुहोस्</h3>
+        <h3>भिडियोमा टिकटक स्टाइल सबटाइटल जोड्नुहोस्</h3>
         
         <form method="POST" enctype="multipart/form-data">
             <div class="file-upload-box">
                 <label for="video_file" style="cursor: pointer; display: block;">📁 भिडियो छान्नुहोस्</label>
                 <input type="file" name="video_file" id="video_file" accept="video/*" required>
             </div>
-            <button type="submit">✨ क्याप्सन जेनेरेट गर्नुहोस्</button>
+            <button type="submit">✨ सबटाइटल जेनेरेट गर्नुहोस्</button>
         </form>
 
-        {% if caption %}
+        {% if output_video %}
         <div class="result-box">
-            <p><strong>📁 भिडियो:</strong> <span style="color: #00c6ff;">{{ filename }}</span></p>
-            <p><strong>📝 स्टाइलिस क्याप्सन:</strong></p>
-            <div class="styled-caption">{{ caption }}</div>
-            <br>
-            <p><strong>🔥 ह्याशट्यागहरू:</strong> <br><span style="color: #00c6ff;">{{ hashtags }}</span></p>
+            <p><strong>🎉 तयार भयो तपाईंको भिडियो!</strong></p>
+            <video controls>
+                <source src="{{ url_for('downloaded_file', filename=output_video) }}" type="video/mp4">
+                तपाईको ब्राउजरले भिडियो सपोर्ट गरेन।
+            </video>
+            <br><br>
+            <a href="{{ url_for('downloaded_file', filename=output_video) }}" download style="color: #00c6ff; font-weight: bold; text-decoration: none;">📥 भिडियो डाउनलोड गर्नुहोस्</a>
         </div>
         {% endif %}
     </div>
